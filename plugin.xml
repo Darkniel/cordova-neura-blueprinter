@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-neuraweb-blueprinter"
+    version="1.0.0">
+    <name>Cordova Bluethoot Printer</name>
+    <description></description>
+    <license>MIT</license>
+    <keywords></keywords>
+
+    <!-- android -->
+    <platform name="android">
+		<js-module src="www/plugin.js" name="plugin">
+        	<runs/>
+
+			<!-- This is the window variable name you want, like window.BluePrinter -->
+			<clobbers target="BluePrinter" />
+      	</js-module>
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="BluePrinter">
+          		<param name="android-package" value="com.neuraweb.BluePrinter" />
+          		<param name="onload" value="true" />
+        	</feature>
+      	</config-file>
+      	<source-file src="src/android/com/neuraweb/BluePrinter.java" target-dir="src/com/neuraweb/" />
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+        </config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+		    <activity android:label="Device List Activity" android:name="com.neuraweb.DeviceListActivity" android:theme="@android:style/Theme.Dialog">
+            </activity>
+		</config-file>
+
+		<source-file src="src/android/com/neuraweb/BluetoothService.java" target-dir="src/com/neuraweb" />
+		<source-file src="src/android/com/neuraweb/DeviceListActivity.java" target-dir="src/com/neuraweb" />
+		<source-file src="src/android/res/layout/device_list.xml" target-dir="res/layout"/>
+		<source-file src="src/android/res/layout/device_name.xml" target-dir="res/layout"/>
+
+		<source-file src="src/android/res/values/bpstrings.xml" target-dir="res/values"/>
+
+		<source-file src="src/android/zj/com/command/sdk/Command.java" target-dir="src/zj/com/command/sdk/" />
+		<source-file src="src/android/zj/com/command/sdk/PrinterCommand.java" target-dir="src/zj/com/command/sdk/" />
+
+        <source-file src="src/android/libs/btsdk.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/libs/zixng.jar" target-dir="libs" framework="true" />
+    </platform>
+</plugin>
